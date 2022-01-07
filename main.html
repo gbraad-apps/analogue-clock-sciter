@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Clock</title>
+    <meta name="application-name" content="Clock">
+    <style>
+      body {
+        overflow: hidden;
+        min-height: 100%;
+        background: black;
+      }
+
+      html {
+        height: 100%;
+      }
+
+      #clockface {
+        height: 96vh;
+      }
+    </style>>
+    <script type="text/javascript">
+      document.addEventListener('DOMContentLoaded', function () {
+        setInterval(tick, 50);
+      }, false);
+
+      var tick = function () {
+        var now = new Date();
+        var hours = now.getHours();
+        var minutes = now.getMinutes();
+        var time = Math.min(60000, 1.025 * (1000 * now.getSeconds() + now.getMilliseconds()));
+        var seconds = Math.floor(time / 1000);
+        var millis = time % 1000;
+        rotate('hourHand', hours * 30 + minutes * 0.5);
+        rotate('minuteHand', minutes * 6);
+        rotate('secondHand', 6 * seconds + 3 * (1 + Math.cos(Math.PI + Math.PI * (0.001 * millis))));
+      };
+
+      function rotate(id, angle) {
+        var element = document.getElementById(id);
+        if (element) {
+          element.setAttribute('transform', 'rotate(' + angle + ', 100, 100)');
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="clockface">
+      <?xml version="1.0" encoding="utf-8"?>
+      <svg xmlns="http://www.w3.org/2000/svg" version="1.1" baseProfile="full" width="100%" height="100%"
+        viewBox="0 0 200 200">
+        <g id="faceplate">
+          <circle id="faceplateCircle" cx="100" cy="100" r="98"
+            style="fill: rgb(179, 179, 179); stroke: black; stroke-width: 3.0" />
+        </g>
+
+        <g id="faceplate">
+          <circle id="faceplateInnerCircle" cx="100" cy="100" r="70"
+            style="fill: black; stroke: black; stroke-width: 3.0" />
+        </g>
+
+        <g id="hourHand">
+          <line x1="100" y1="100" x2="100" y2="37" style="stroke: white; stroke-width: 4" />
+        </g>
+
+        <g id="minuteHand">
+          <line x1="100" y1="100" x2="100" y2="33" style="stroke: white; stroke-width: 3" />
+        </g>
+
+        <g id="secondHand">
+          <line x1="100" y1="100" x2="100" y2="7" style="stroke: rgb(255, 140, 0); stroke-width: 2" />
+        </g>
+
+        <g id="axisCover">
+          <circle id="axisCoverCircle" cx="100" cy="100" r="4" style="fill: black; stroke: white; stroke-width: 2.0" />
+        </g>
+      </svg>
+    </div>
+  </body>
+</html>
