@@ -1,5 +1,5 @@
-SVG based desktop clock
-=======================
+gbraad's Analogue Clock: SVG based desktop clock
+================================================
 
 Based on my older project [html5-clock](https://github.com/gbraad/).
 
