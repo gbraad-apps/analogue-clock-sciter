@@ -12,6 +12,7 @@
       body {
         overflow: hidden;
         min-height: 100%;
+        margin: 0;
       }
 
       html {
@@ -20,6 +21,7 @@
 
       #clockface {
         height: 96vh;
+        width: 96vw;
       }
 
       /* Window decoration */
@@ -36,11 +38,11 @@
       Window.this.isTopmost = true;
 
       // Clock code
-      document.addEventListener('DOMContentLoaded', function () {
-        setInterval(tick, 50);
-      }, false);
+      document.on("ready", function(evt) {
+        setInterval(updateClock, 50);
+      });
 
-      var tick = function () {
+      var updateClock = function () {
         var now = new Date();
         var hours = now.getHours();
         var minutes = now.getMinutes();
